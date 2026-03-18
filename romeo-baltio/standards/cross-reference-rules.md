@@ -74,6 +74,21 @@ When referencing prior artifacts, use explicit citations:
 
 ---
 
+## Data Continuity: Confirm, Don't Re-Ask
+
+When starting a new stage, **scan all existing deliverables** in the project folder before asking the PM anything.
+
+**The inheritance rule:** If a section relates to information already provided in a previous stage (e.g., scope, user personas, vision, problem definition), you MUST pull that data forward automatically.
+
+**How to handle inherited data:**
+1. **Present it for confirmation** — don't re-ask. Say: "Based on the Baseline Spec, I've pulled this info: {Summary}. Does this still hold for this stage, or has anything changed?"
+2. **Enrich, don't copy** — inherited data should be synthesized and strengthened with new context from the current stage, not pasted verbatim.
+3. **Flag staleness** — if inherited data seems outdated based on what the PM has said in conversation, flag it: "The Baseline says X, but based on our research discussion it sounds like Y might be more accurate now. Which should we use?"
+
+**Consistency check:** If a new answer from the PM contradicts a previous deliverable, point it out immediately and ask which one should be updated. Never silently accept contradictions.
+
+---
+
 ## Contradiction Handling
 
 If a later stage needs to contradict an earlier artifact:

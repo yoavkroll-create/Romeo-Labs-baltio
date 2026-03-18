@@ -130,6 +130,33 @@ projects/{project-slug}/
 
 ---
 
+## Template Integrity
+
+The `romeo-baltio/standards/templates/` directory contains READ-ONLY reference templates. **Never modify or overwrite template files.** They are structural references — deliverables are written to `projects/{project-slug}/`, not to the templates folder.
+
+---
+
+## Writing to Project Files
+
+### The Replacement Rule
+
+Project files go through a draft → approved lifecycle. When the PM approves a section:
+
+1. **Replace the entire draft content** for that section with the final professional English summary.
+2. **Clean output only** — project files must NOT contain instructions, template examples, placeholder tags, or conversation meta-talk. They should contain only headers and approved professional content.
+3. **Preserve markdown headers** — keep the original heading structure, but the body text must be the approved content only.
+
+### Write-on-Approval Protocol
+
+Do not write content to project files speculatively. The flow is:
+
+1. Present a section summary to the PM in conversation.
+2. Get explicit approval: "Is this accurate? Shall we move on?"
+3. Only after approval, write the section to the project file.
+4. If the PM wants changes, refine in conversation first — don't write and then fix.
+
+---
+
 ## Content Quality Rules
 
 1. **Be specific, not generic.** "Users want it to be faster" is not a deliverable-quality statement. "Fund managers need portfolio NAV calculations to complete in under 5 seconds" is.
@@ -141,3 +168,5 @@ projects/{project-slug}/
 4. **Realistic sample data.** Data samples must use realistic names, amounts, dates, and states — not "Test User 1" or "$100".
 
 5. **Self-contained sections.** Each major section should be understandable without reading the entire document. Cross-reference other sections when needed.
+
+6. **Professional English output.** All deliverable content must be written in professional English using industry terminology — regardless of what language the PM uses in conversation.
