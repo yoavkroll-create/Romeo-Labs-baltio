@@ -35,9 +35,52 @@ Before generating anything, ask the PM **at least 5 clarifying questions** to en
 
 Wait for PM responses before proceeding.
 
-### Step 3: Generate Draft Deliverables
+### Step 2b: Tech Landscape Assessment
 
-Generate all 5 deliverables as drafts:
+After receiving the PM's answers, generate a brief **Tech Landscape Assessment** and present it to the PM before generating the full deliverables. This is not architecture — it's an orientation on the type of system being described.
+
+**Assess the following based on the PM's answers:**
+
+1. **System class:** Based on the product description and scale, classify the system:
+   - **Simple** — Single app + database, standard CRUD, <1K users. Example: internal tool, simple marketplace.
+   - **Moderate** — Multiple user roles, integrations, background processing, 1K–100K users. Example: SaaS platform, content management system.
+   - **Complex** — Real-time requirements, distributed data, compliance needs, 100K+ users or multi-tenant. Example: fintech platform, collaboration tool, healthcare system.
+
+2. **Typical system layers:** Based on the product type, list the system layers this product will likely involve:
+   - Frontend (web, mobile, or both)
+   - Backend API
+   - Database
+   - CMS (if applicable — e.g., Strapi, Contentful, Sanity)
+   - Background jobs (if applicable — e.g., notifications, reports, data sync)
+   - Third-party integrations (if mentioned)
+   - Cloud / hosting (e.g., AWS, Azure, GCP, Vercel — if mentioned or implied by constraints)
+   - Infrastructure considerations (if applicable — e.g., CDN, file storage, real-time)
+
+3. **Known external dependencies:** If the PM mentioned integrations, existing systems, or third-party services:
+
+   **If WebSearch is available:** Run a quick existence check for each mentioned service:
+   - Search for "{service name} API documentation"
+   - Confirm: Does a public API exist? Is there a developer docs page?
+   - Note: REST/GraphQL, authentication model (API key, OAuth, etc.), and whether a sandbox/test environment exists
+   - Do NOT do deep research — just confirm existence and note the basics. Deep analysis happens in Stage 2.
+
+   **If WebSearch is not available:** List the mentioned services and note whether they likely have public APIs based on common knowledge. Flag any that are uncertain for Stage 2 research.
+
+**Present to the PM as:**
+> "Before I generate the full baseline, here's my read on the technical landscape: this looks like a **{system class}** system, typically involving {layers}. {Any notes on external dependencies}. Does this match your understanding, or am I off on the scale/complexity?"
+
+Incorporate the PM's corrections, then proceed.
+
+### Step 3: Generate Draft Deliverables — One at a Time
+
+Generate deliverables following the interaction protocol's "One Deliverable at a Time" rule. For each deliverable or batch: draft → present to PM → iterate → confirm → move to next.
+
+The order matters — each deliverable builds on the previous:
+1. **Baseline Spec** — establishes the problem, users, and current state
+2. **Capability List + Happy Flow** *(batch)* — the flow traces through the capabilities; same mental context. Present both together for review.
+3. **Research Questions + Research Prompts** *(batch)* — prompts are the questions reformatted as executable prompts. Once the PM approves the questions, the prompts are mechanical. Present both together.
+
+Do NOT generate all deliverables at once. The PM's feedback on the baseline spec will influence the capability list, which influences everything downstream.
 
 #### 3a. Baseline Spec (`baseline/baseline-spec.md`)
 
@@ -108,6 +151,11 @@ What makes this product unique compared to existing alternatives:
 What the system must be able to do (not UI, not features — system abilities):
 - ...
 
+## Tech Landscape
+- **System class:** {Simple / Moderate / Complex} — {one sentence justification}
+- **System layers:** {Frontend (web/mobile/both), Backend API, Database, CMS (if applicable), Background jobs, Third-party integrations, Cloud/hosting, Infrastructure}
+- **Known external dependencies:** {List any mentioned integrations/services, or "None identified yet"}
+
 ## Constraints and Assumptions
 - **Technical:** ...
 - **Business:** ...
@@ -121,11 +169,21 @@ Questions that must be answered before feature definition:
 
 #### 3b. Capability List (`baseline/capability-list.md`)
 
-A structured list of system capabilities extracted from the spec:
+A structured list of system capabilities extracted from the spec, with early technical complexity signals:
 
-| # | Capability | User Need | Priority | Notes |
-|---|-----------|-----------|----------|-------|
-| 1 | ... | ... | Core/Important/Nice-to-have | ... |
+| # | Capability | User Need | Priority | Complexity Signal | Why | Notes |
+|---|-----------|-----------|----------|-------------------|-----|-------|
+| 1 | ... | ... | Core/Important/Nice-to-have | Standard/Medium/High | ... | ... |
+
+**Complexity Signal** — An early, broad assessment of implementation complexity based on common patterns. This is NOT an estimate — it's a signal to inform MVP scope decisions and flag capabilities that carry disproportionate technical weight.
+
+| Signal | Meaning | Examples |
+|--------|---------|---------|
+| **Standard** | Well-solved pattern, widely available libraries/services, predictable effort | User auth (email/password), basic CRUD, static dashboards, file upload, email notifications |
+| **Medium** | Requires meaningful engineering decisions, may involve integrations or non-trivial logic | Role-based permissions, third-party API integration, scheduled jobs, search with filters, PDF/report generation |
+| **High** | Changes the architecture or requires specialized infrastructure, significant unknowns | Real-time collaboration, ML/AI pipelines, offline-first sync, payment processing with compliance, event streaming, multi-tenant data isolation |
+
+**How to assess:** Base the signal on common implementation patterns for this type of capability, not on this specific product's constraints. The goal is to surface which capabilities are fundamentally harder — regardless of team or stack. If unsure, lean toward the higher signal.
 
 #### 3c. Happy Flow (`baseline/happy-flow.md`)
 
@@ -140,7 +198,13 @@ A detailed step-by-step happy flow document with:
 Organized by category:
 - **Market:** Questions about market size, competitors, trends
 - **Users:** Questions about user behavior, preferences, willingness to pay
-- **Technical:** Questions about feasibility, integration, infrastructure
+- **Technical:** Questions about existing solutions, feasibility, integration, and infrastructure. Cover these sub-areas:
+  - **Existing solutions:** Is there an off-the-shelf product, SaaS, or third-party service that already solves this problem (fully or partially)? Could we buy/integrate instead of build? What are the trade-offs?
+  - **Integrations:** Do the required third-party services have public APIs? What auth models do they use? Are there sandboxes/test environments? What are known rate limits?
+  - **Data:** Where does the core data come from? Is there existing data to migrate? What are the data volume expectations?
+  - **Compliance / Security:** Are there regulatory requirements (GDPR, HIPAA, PCI, SOC2)? Does the target market expect specific certifications?
+  - **Platform:** Are there platform-specific constraints (app store policies, browser support, device requirements)?
+  - **Precedent:** Have similar products been built on common stacks? What patterns do competitors use (check job postings, tech blogs, public API docs)?
 - **Business:** Questions about monetization, partnerships, go-to-market
 
 Each question should be specific and answerable through research.

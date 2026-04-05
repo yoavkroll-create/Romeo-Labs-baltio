@@ -192,12 +192,18 @@ Create `.romeo-state.json` with this structure:
     },
     "validation": {
       "status": "not-started",
-      "deliverables": {},
+      "deliverables": {
+        "validation-mvp": { "path": "prototype/validation/validation-mvp-round-1.md", "status": "pending" },
+        "validation-future": { "path": "prototype/validation/validation-future-round-1.md", "status": "pending", "required": false }
+      },
       "dod": { "passed": false, "items": [] }
     },
     "iteration": {
       "status": "not-started",
-      "deliverables": {},
+      "deliverables": {
+        "iteration-plan-mvp": { "path": "prototype/iterations/iteration-mvp-round-1.md", "status": "pending" },
+        "iteration-plan-future": { "path": "prototype/iterations/iteration-future-round-1.md", "status": "pending", "required": false }
+      },
       "dod": { "passed": false, "items": [] }
     },
     "final-prd": {
@@ -211,7 +217,12 @@ Create `.romeo-state.json` with this structure:
     },
     "handoff": {
       "status": "not-started",
-      "deliverables": {},
+      "deliverables": {
+        "mission": { "path": "final-prd/handoff/mission.md", "status": "pending" },
+        "roadmap": { "path": "final-prd/handoff/roadmap.md", "status": "pending" },
+        "tech-stack": { "path": "final-prd/handoff/tech-stack.md", "status": "pending" },
+        "feature-specs": { "path": "final-prd/handoff/features/", "status": "pending" }
+      },
       "dod": { "passed": false, "items": [] }
     }
   },

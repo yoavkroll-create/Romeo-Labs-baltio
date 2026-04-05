@@ -203,6 +203,46 @@ Save the readiness result to `.romeo-state.json`:
 | `validation_captured` | Prototype learnings captured | Yes | Changes from Initial PRD documented |
 | `self_contained` | Document is self-contained | Yes | Developer can understand full product |
 
+### Validation (`validation`)
+
+| Key | Criterion | Required | What to Check |
+|-----|-----------|----------|---------------|
+| `inputs_gathered` | Validation inputs gathered | Yes | PM has provided prototype feedback (built prototype or spec-level review) |
+| `dimensions_scored` | All 6 dimensions scored | Yes | Problem-Solution Fit, User Flow Clarity, Product Experience, Feature Completeness, Data & Integration, Demo Readiness — each scored 1–5 |
+| `scores_evidence` | Scores are evidence-based | Yes | Every score has specific justification, not gut feeling |
+| `features_assessed` | Feature completeness assessed | Yes | Every MVP feature checked with Working/Partial/No status |
+| `critical_issues` | Critical issues identified | Yes | All blocking issues listed with descriptions and suggested fixes |
+| `scope_adjustments` | Scope adjustments documented | Yes | Feature priority changes listed with evidence-based reasons |
+| `next_action` | Next action determined | Yes | Clear recommendation: proceed (≥ 4.0), iterate (3.0–3.9), or re-scope (< 3.0) |
+| `report_saved` | Validation report saved | Yes | Report saved to `prototype/validation/validation-{variant}-round-{N}.md` |
+
+### Iteration (`iteration`)
+
+| Key | Criterion | Required | What to Check |
+|-----|-----------|----------|---------------|
+| `findings_reviewed` | Validation findings reviewed | Yes | Latest validation report's issues and recommendations reviewed with PM |
+| `pm_aligned` | PM alignment confirmed | Yes | PM agreed on priorities and scope changes before plan generation |
+| `changes_traced` | Changes trace to validation | Yes | Every change cites a specific validation finding |
+| `plan_structured` | Iteration plan is structured | Yes | Includes flow improvements, feature adjustments, UX, data model, integrations |
+| `scope_discipline` | Scope discipline maintained | Yes | No new features unless PM explicitly requests and feature list updated |
+| `comparison_documented` | Iteration comparison documented | Yes | Before/after comparison of screens, features, flows, issues |
+| `iteration_dod` | Iteration DoD defined | Yes | Specific criteria for what "done" means for this round |
+| `plan_saved` | Iteration plan saved | Yes | Plan saved to `prototype/iterations/iteration-{variant}-round-{N}.md` |
+| `guardrails_checked` | Guardrails checked | No | At round 5+, PM flagged about iteration limit |
+
+### Handoff (`handoff`)
+
+| Key | Criterion | Required | What to Check |
+|-----|-----------|----------|---------------|
+| `final_prd_complete` | Final PRD is complete | Yes | Final PRD stage passed all DoD criteria |
+| `mission_generated` | Mission file generated | Yes | `mission.md` follows agentOS 2 format: Pitch → Users → Problem → Differentiators → Key Features |
+| `roadmap_generated` | Roadmap file generated | Yes | `roadmap.md` uses numbered checkbox items with effort estimates |
+| `tech_stack_generated` | Tech stack file generated | Yes | `tech-stack.md` includes specific versions, grouped by layer |
+| `feature_specs_generated` | Feature spec files generated | Yes | Every MVP feature has a feature description in `handoff/features/` |
+| `format_validated` | Format matches agentOS 2 | Yes | Files match real CherryClipz/CO-IN/Testchair format conventions |
+| `no_info_lost` | No information lost | Yes | All relevant Final PRD content captured in handoff files |
+| `handoff_summary` | Handoff summary presented | Yes | Complete summary with file list, feature mapping, and agentOS 2 usage guide |
+
 ---
 
 ## Extending the Engine
